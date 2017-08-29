@@ -35,7 +35,9 @@
 							                    <div class="">
 									               <input class="spinner" type="number" ng:model="item.qty" min="0" max="20"> 
 									            </div>
-												    
+												<div class="text-center">
+												    <a href="<c:url value="/delete?id={{item.id}}"/>"><span >Remover</span></a>
+												    </div>    
 							                </div>
 							                <div class="col-md-2">
 							                	<h2 class="media-heading center-block text-center">
