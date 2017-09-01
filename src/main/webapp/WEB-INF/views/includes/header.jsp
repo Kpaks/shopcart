@@ -34,6 +34,7 @@
 	     <div class="container">
 	        <div class="row">
 	           <div class="col-md-5">
+				  
 	              <!-- Logo -->
 	              <div class="logo">
 	                 <h1><a href="index.html">E-Commerce</a></h1>
@@ -71,6 +72,7 @@
 	</div>
 	<div class="page-content">
     	<div class="row">
+    			  	<div class="row" id="cartForm">
 		  <div class="col-md-3">
 		  	<div class="sidebar content-box" style="display: block;">
                 <ul class="nav">

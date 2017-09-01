@@ -3,8 +3,14 @@
 <%@ include file="includes/header.jsp" %>
 
 <div class="col-md-8">
-		  	<div class="row">
 
+			<div class="row">
+				
+				<div class="col-md-10 p-l-4">
+					<h3>My cart: ({{totalItens()}} items)</h3>
+				</div>
+			</div>
+				<form data-ng-submit="submit()" name="myForm">
 		  				<div class="col-md-12">
 		  					<div class="content-box-header">
 			  					<div class="col-md-6 pull-left">Item(s)</div>
@@ -49,18 +55,81 @@
 				  					</div>
 				  					
 				  					<div class="row">
-					  					<div class="col-md-3 pull-right">
-					  					Valor Total: {{total() | currency}}
-					  					</div>
-				  						<div class="col-md-2 pull-right">
-					  					Item(s): {{totalItens()}}
-					  					</div>
+						  					<div class="col-md-2 pull-right">
+						  					 <h4>{{total() | currency}}</h4>
+						  					</div>
+					  						<div class="col-md-3 pull-right">
+						  					<h4>SubTotal ({{totalItens()}} Item(s)):</h4>
+						  					</div>
 				  					</div>
 							</div>
 		  				</div>
+				  					<div class="row">
+						  					<div class="col-md-12">
+				  					<button type="submit" class="btn btn-success  pull-right m-r-2">Finalizar Compra</button>
+						  					</div>
+				  					</div>
+				  		</form>
 		  	</div>
-
-
 		  </div>
 		  
+		  <div class="row" id="finishedForm" hidden>
+		  		<div class="col-md-2">
+		  		</div>
+		  		<div class="col-md-8 content-box-large">
+				  			<div class="col-md-12 text-center">
+				  				<h3>Pedido Realizado com Sucesso</h3>
+				  			</div>
+				  			<h3>Resumo do Pedido</h3>
+				  			<div class="col-md-12">
+				  				<div class="col-md-6">
+				  					<p>Número do pedido: 1248895478</p>
+				  				</div>
+				  				<div class="col-md-6">
+				  					Valor: {{total() | currency}}
+				  				</div>
+				  			</div>
+				  			<div class="col-md-12">
+				  				<div class="col-md-6">
+				  					<div class="col-md-12">
+				  					<strong>Seus Dados</strong>
+				  					</div>
+				  					<div class="col-md-12">
+				  					John Doe
+				  					</div>
+				  				</div>
+				  				<div class="col-md-6">
+				  					<div class="col-md-12">
+				  					<strong>Endereço de Entrega</strong>
+				  					</div>
+				  					<div class="col-md-12">
+				  					Rua Mirassol - 777, Bosque dos Eucaliptos
+				  					</div>
+				  				</div>
+				  			</div>
+				  			<div class="col-md-12">
+				  			<p>  </p>
+				  			</div>
+				  			<div class="col-md-12">
+				  				<div class="col-md-12">
+				  					<strong>Entrega</strong>
+				  				</div>
+				  				<div class="col-md-12 pull-right">
+				  					<p class="pull-right">Entrega em até 4 dias</p> 
+				  				</div>
+				  				<div ng:repeat="item in finishShop">
+				  					<div class="col-md-6">
+				  					<p>{{item.name}}</p> 
+				  					</div>
+				  					<div class="col-md-6">
+				  					<p class="pull-right">{{item.qty}}</p> 
+				  					</div>
+				  				</div>
+				  			</div>
+				  			
+				  				
+		  				</div>
+		  				<div class="col-md-2" >
+		  		</div>
+		  </div>
 <%@ include file="includes/footer.jsp" %>

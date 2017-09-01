@@ -19,8 +19,7 @@
       var app = angular.module('myApp',['ngRoute']);
      
       
-      app.controller('myController', ['$scope',function($scope) {
-    	  
+      app.controller('myController', ['$scope','$http', function($scope,$http) {
     	  
 
     	  $scope.items = [];
@@ -31,6 +30,7 @@
         	  (materialList[int])["qty"] = 1;
         	  $scope.items.push(materialList[int])
     		}
+          
           console.log($scope.items);
           
           $scope.total = function() {
@@ -42,6 +42,15 @@
               return total;
           }
           
+          $scope.totalCart = function() {
+              var totalCart = 0;
+              angular.forEach(finishShop, function(item) {
+                  total += item.qty * item.discountPrice;
+              })
+
+              return totalCart;
+          }
+          
           $scope.totalItens = function() {
               var totalItens = 0;
               angular.forEach($scope.items, function(item) {
@@ -50,9 +59,57 @@
 
               return totalItens;
           }
+          
+          
+          $scope.addItem = function () {
+        	  
+        	  if(!($scope.items == [])){
+        		  
+        		  angular.forEach($scope.items, function(item) {
+                      totalItens += item.qty;
+                  })
+        		  
+        		  
+    		       $scope.items.push({
+    		          materialId: itemId,
+    		          ecode: itemEcode,
+    		          value: unitValue.replace("$","").replace(",","").replace(",",""),
+    		          currency: itemCurrency,
+    		          quantity: itemQuantity
+    		       });
+    		       
+        	  }else{
+        		  alert("There is no items in the cart.");
+        		   }  
+        	  
+         };
+         
+         $scope.submit = function() {
+        	 if ($scope.items.length != 0) {
+        		 var date = JSON.stringify($scope.items);
+        	 $http({
+        	        method: 'POST',
+        	        url: 'finish-shop',
+        	        data: date,
+        	        async: false
+        	        
+        	    }).then(function (response) {
+        	    	$( '#cartForm' ).hide();
+        	    	$( '.header' ).hide();
+        	    	
+        	    	$scope.finishShop = response.data;
+        	    	$( '#finishedForm' ).show();
+        	    	
+        	    	
+        	    	
+        	    })
+    		} else alert("Applied Material List is empty!");
+        	    
+         };
     	  
       }]);
       
+      app.$inject = ['$scope', '$http'];
       
       
       
